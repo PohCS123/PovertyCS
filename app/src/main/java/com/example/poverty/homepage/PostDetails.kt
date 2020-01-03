@@ -14,8 +14,11 @@ class PostDetails : AppCompatActivity() {
 
         val navigationVarTitle = intent.getStringExtra(PostAdapter.PostViewHolder.POST_TITLE_KEY)
         supportActionBar?.setTitle(navigationVarTitle)
+        textViewDetailsTitle.setText(navigationVarTitle)
         val navigationVarImage = intent.getStringExtra(PostAdapter.PostViewHolder.POST_IMAGE_KEY)
         Picasso.with(applicationContext).load(navigationVarImage).into(imageViewPostDetails);
+        val navigationVarDesc = intent.getStringExtra(PostAdapter.PostViewHolder.POST_DESC_KEY)
+        textViewDetailsDes.setText(navigationVarDesc)
 
     }
 

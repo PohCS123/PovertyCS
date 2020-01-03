@@ -42,6 +42,7 @@ class PostAdapter internal constructor(context: Context) :
         companion object{
             val POST_TITLE_KEY="com.example.poverty.homepage.POSTTITLE"
             val POST_IMAGE_KEY="com.example.poverty.homepage.POSTIMAGE"
+            val POST_DESC_KEY="com.example.poverty.homepage.POSTDESC"
         }
 
         init{
@@ -50,6 +51,7 @@ class PostAdapter internal constructor(context: Context) :
                 val intent = Intent(itemView.context,PostDetails::class.java)
                 intent.putExtra(POST_TITLE_KEY,posted?.posttitle)
                 intent.putExtra(POST_IMAGE_KEY,posted?.postImg)
+                intent.putExtra(POST_DESC_KEY,posted?.postdesc)
                 itemView.context.startActivity(intent)
             }
         }
