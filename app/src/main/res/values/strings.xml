@@ -10,6 +10,7 @@
     <string name="Title">Title : </string>
     <string name="date">Posted On : </string>
     <string name="Description">Description : </string>
+    <string name="view">view</string>
 
 
 </resources>
