@@ -15,6 +15,9 @@ data class RecycleViewPost(
     @ColumnInfo (name = "post_title")
     var posttitle: String ="",
 
+    @ColumnInfo (name = "post_subtitle")
+    var postsubtitle: String="",
+
     @ColumnInfo (name = "post_desc")
     var postdesc : String ="",
 

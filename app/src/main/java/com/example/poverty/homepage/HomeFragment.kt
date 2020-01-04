@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager.widget.ViewPager
 import com.example.poverty.Database.PostDatabaseDao
 import com.example.poverty.Database.PostRoomDatabase
 import com.example.poverty.Database.RecycleViewPost
@@ -21,7 +22,9 @@ import com.example.poverty.R
 import com.example.poverty.databinding.FragmentHomeBinding
 //import com.example.poverty.databinding.FragmentHomeBindingImpl
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.layout_post_list_item.*
 import kotlinx.coroutines.CoroutineScope
 
 /**
@@ -55,6 +58,11 @@ class HomeFragment : Fragment( ) {
             // Update the cached copy of the users in the adapter
                 users -> users?.let { adapter?.setPosts(it) }
         })
+
+        /*val vp: ViewPager? = activity?.findViewById(R.id.view_pager)
+        buttonDonate.setOnClickListener {
+            vp?.currentItem =2
+    }*/
 
 
         /*fab.setOnClickListener {

@@ -3,7 +3,7 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar"> <!--Team.AppCompat set global theme for entire app-->
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/tabUnSelectedIconColor</item>  <!--//mainly for app bar-->
+        <item name="colorPrimary">@color/colorPrimary</item>  <!--//mainly for app bar-->
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>  <!--// for status bar-->
         <item name="colorAccent">@color/colorAccent</item> <!--//for some view-->
         <item name="drawerArrowStyle">@style/DrawerIcon</item>  // style apply for drawer menu

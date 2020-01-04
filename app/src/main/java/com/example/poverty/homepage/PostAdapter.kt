@@ -1,5 +1,6 @@
 package com.example.poverty.homepage
 
+import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -21,6 +22,10 @@ import com.squareup.picasso.Picasso
 import java.io.File
 import kotlin.coroutines.coroutineContext
 import android.util.Log
+import android.widget.Button
+import androidx.core.content.ContextCompat.startActivity
+import androidx.viewpager.widget.ViewPager
+import com.blogspot.atifsoftwares.animatoolib.Animatoo
 import kotlinx.android.synthetic.main.layout_post_list_item.view.*
 
 
@@ -30,14 +35,12 @@ class PostAdapter internal constructor(context: Context) :
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var posts = emptyList<RecycleViewPost>() // Cached copy of words
 
-    /*var data = listOf<RecycleViewPost>() // Cached copy of words
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }*/
-
-
     class PostViewHolder(itemView: View,var posted:RecycleViewPost?=null) : RecyclerView.ViewHolder(itemView) {
+
+        val buttonShares: Button = itemView.findViewById(R.id.buttonShare)
+        val buttonDonate: Button = itemView.findViewById(R.id.buttonDonate)
+
+        //val buttonToDeatails:Button =itemView.findViewById(R.id.)
 
         companion object{
             val POST_TITLE_KEY="com.example.poverty.homepage.POSTTITLE"
@@ -53,11 +56,29 @@ class PostAdapter internal constructor(context: Context) :
                 intent.putExtra(POST_IMAGE_KEY,posted?.postImg)
                 intent.putExtra(POST_DESC_KEY,posted?.postdesc)
                 itemView.context.startActivity(intent)
+                Animatoo.animateSlideUp(it.context)
             }
+            buttonShares.setOnClickListener {
+                onClick(it)
+            }
+
+        }
+
+        fun onClick(view:View){
+
+            Log.d("TAG", "Button is clicked")
+            val intent = Intent()
+            intent.action = Intent.ACTION_SEND
+            intent.putExtra(Intent.EXTRA_TEXT,posted?.postsubtitle)
+            intent.type="text/plain"
+
+            view.context.startActivity(Intent.createChooser(intent,"Share to : "))
         }
         val postTitle: TextView = itemView.findViewById(R.id.post_title)
-        val postDesc: TextView = itemView.findViewById(R.id.post_desc)
+        val postSubtitle: TextView = itemView.findViewById(R.id.post_desc)
         val postImage: ImageView = itemView.findViewById(R.id.post_image)
+
+
 
         /*fun bind(post: RecycleViewPost){
             postTitle.setText(post.posttitle)
@@ -89,7 +110,7 @@ class PostAdapter internal constructor(context: Context) :
         val title = current.postID.toString()
         Log.d("TAG", title)
         holder.postTitle.text = current.posttitle
-        holder.postDesc.text = current.postdesc
+        holder.postSubtitle.text = current.postsubtitle
         val thumbnailImage = holder?.itemView?.post_image
         Picasso.with(holder.itemView.context).load(current.postImg).into(thumbnailImage)
         /*when(holder){

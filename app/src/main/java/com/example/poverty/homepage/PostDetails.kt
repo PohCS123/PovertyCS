@@ -19,7 +19,8 @@ class PostDetails : AppCompatActivity() {
         Picasso.with(applicationContext).load(navigationVarImage).into(imageViewPostDetails);
         val navigationVarDesc = intent.getStringExtra(PostAdapter.PostViewHolder.POST_DESC_KEY)
         textViewDetailsDes.setText(navigationVarDesc)
-
+        //supportActionBar.set
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_arrow_actionback_24dp)
     }
 
 
