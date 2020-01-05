@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import com.example.poverty.R
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_post_details.*
 
 class PostDetails : AppCompatActivity() {
@@ -17,7 +18,7 @@ class PostDetails : AppCompatActivity() {
 
         val navigationVarTitle = intent.getStringExtra(PostAdapter.PostViewHolder.POST_TITLE_KEY)
         supportActionBar?.setTitle(navigationVarTitle)
-        textViewDetailsTitle.setText(navigationVarTitle)
+        textViewLabelTitle.setText(navigationVarTitle)
         val navigationVarImage = intent.getStringExtra(PostAdapter.PostViewHolder.POST_IMAGE_KEY)
         Picasso.with(applicationContext).load(navigationVarImage).into(imageViewPostDetails);
         val navigationVarDesc = intent.getStringExtra(PostAdapter.PostViewHolder.POST_DESC_KEY)
@@ -36,8 +37,9 @@ class PostDetails : AppCompatActivity() {
 
     fun onclick(view: View){
         Log.d("TAG", "Button is clicked")
-        val intent = Intent(view.context,WebView::class.java)
-        view.context.startActivity(intent)
+        //val intent = Intent(view.context,WebView::class.java)
+        //view.context.startActivity(intent)
+        view_pager.currentItem=1
 
     }
 

@@ -13,7 +13,7 @@ class WebView : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_web_view)
-        
+
         webView.settings.setSupportZoom(false)
         webView.setWebViewClient(WebViewClient())
         webView.loadUrl("https://www.google.co.in/")

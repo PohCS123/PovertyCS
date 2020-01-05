@@ -23,6 +23,7 @@ import java.io.File
 import kotlin.coroutines.coroutineContext
 import android.util.Log
 import android.widget.Button
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.viewpager.widget.ViewPager
 import com.blogspot.atifsoftwares.animatoolib.Animatoo
@@ -53,12 +54,13 @@ class PostAdapter internal constructor(context: Context) :
             itemView.setOnClickListener {
                 print("Testing123")
                 val intent = Intent(itemView.context,PostDetails::class.java)
+                //val options : ActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(this@MainActivity)
                 intent.putExtra(POST_TITLE_KEY,posted?.posttitle)
                 intent.putExtra(POST_IMAGE_KEY,posted?.postImg)
                 intent.putExtra(POST_DESC_KEY,posted?.postdesc)
                 intent.putExtra(POST_DATE_KEY,posted?.postDate)
                 itemView.context.startActivity(intent)
-                Animatoo.animateSlideUp(it.context)
+                Animatoo.animateZoom(it.context)
             }
             buttonShares.setOnClickListener {
                 onClick(it)
