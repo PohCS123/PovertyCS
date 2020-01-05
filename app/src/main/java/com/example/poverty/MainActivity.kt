@@ -154,17 +154,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding.navView.setNavigationItemSelectedListener(this)
 
         //Initialise variables and UI
-        userList = ArrayList<User>()
 
-        adapter = UserListAdapter(this)
-        adapter.setUsers(userList)
 
-        progress = findViewById(R.id.progress_bar)
-        progress.visibility = View.GONE
-
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
 
         /* XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
         fab.setOnClickListener { view ->
@@ -175,28 +166,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
          */
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when(item.itemId) {
-            R.id.action_sync -> {
-                if(isConnected()){
-                    syncContact()
-                }else{
-                    Toast.makeText(applicationContext, "Offline", Toast.LENGTH_SHORT).show()
-                }
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(requestCode == REQUEST_CODE){
@@ -215,7 +185,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 "&email=" + user.email +
                 "&password=" + user.password
 
-        progress.visibility = View.VISIBLE
 
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.GET, url, null,
@@ -259,74 +228,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
 
-    private fun syncContact() {
-        val url = getString(R.string.url_server) + getString(R.string.url_user_read)
 
-        //Display progress bar
-        progress.visibility = View.VISIBLE
-
-        //Delete all user records
-        userList.clear()
-
-        val jsonObjectRequest = JsonObjectRequest(
-            Request.Method.GET, url, null,
-            Response.Listener { response ->
-                // Process the JSON
-                try{
-                    if(response != null){
-                        val strResponse = response.toString()
-                        val jsonResponse  = JSONObject(strResponse)
-                        val jsonArray: JSONArray = jsonResponse.getJSONArray("records")
-
-                        val size: Int = jsonArray.length()
-
-                        for(i in 0..size-1){
-                            var jsonUser: JSONObject = jsonArray.getJSONObject(i)
-                            var user: User = User(jsonUser.getString("name"),
-                                jsonUser.getString("email"),jsonUser.getString("password"))
-
-                            userList.add(user)
-                        }
-                        Toast.makeText(applicationContext, "Record found :" + size, Toast.LENGTH_LONG).show()
-                        progress.visibility = View.GONE
-                    }
-                }catch (e:Exception){
-                    Log.d("Main", "Response: %s".format(e.message.toString()))
-                    progress.visibility = View.GONE
-
-                }
-            },
-            Response.ErrorListener { error ->
-                Log.d("Main", "Response: %s".format(error.message.toString()))
-                progress.visibility = View.GONE
-            }
-        )
-
-        //Volley request policy, only one time request
-        jsonObjectRequest.retryPolicy = DefaultRetryPolicy(
-            DefaultRetryPolicy.DEFAULT_TIMEOUT_MS,
-            0, //no retry
-            1f
-        )
-
-        // Access the RequestQueue through your singleton class.
-        jsonObjectRequest.tag = TAG
-        MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest)
-    }
-
-    override fun onBackPressed() {
-
-
-        MySingleton.getInstance(this).cancelRequest(TAG)
-        super.onBackPressed()
-    }
-
+    /*
     private fun isConnected(): Boolean{
         val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
         return activeNetwork?.isConnectedOrConnecting == true
     }
-
+    */
     companion object{
         const val TAG = "com.example.poverty"
     }
