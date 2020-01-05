@@ -3,6 +3,8 @@ package com.example.poverty.Database
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.sql.Date
+import java.util.*
 
 // This is entity
 
@@ -17,6 +19,9 @@ data class RecycleViewPost(
 
     @ColumnInfo (name = "post_subtitle")
     var postsubtitle: String="",
+
+    @ColumnInfo(name = "post_date")
+    var postDate : String="",
 
     @ColumnInfo (name = "post_desc")
     var postdesc : String ="",

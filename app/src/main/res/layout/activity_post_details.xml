@@ -105,7 +105,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textViewLabelDes" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/buttonView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"

@@ -46,6 +46,7 @@ class PostAdapter internal constructor(context: Context) :
             val POST_TITLE_KEY="com.example.poverty.homepage.POSTTITLE"
             val POST_IMAGE_KEY="com.example.poverty.homepage.POSTIMAGE"
             val POST_DESC_KEY="com.example.poverty.homepage.POSTDESC"
+            val POST_DATE_KEY= "com.example.poverty.homepage.POSTDATE"
         }
 
         init{
@@ -55,6 +56,7 @@ class PostAdapter internal constructor(context: Context) :
                 intent.putExtra(POST_TITLE_KEY,posted?.posttitle)
                 intent.putExtra(POST_IMAGE_KEY,posted?.postImg)
                 intent.putExtra(POST_DESC_KEY,posted?.postdesc)
+                intent.putExtra(POST_DATE_KEY,posted?.postDate)
                 itemView.context.startActivity(intent)
                 Animatoo.animateSlideUp(it.context)
             }
